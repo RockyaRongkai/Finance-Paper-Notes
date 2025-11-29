@@ -1,203 +1,73 @@
-# Arnott, Kalesnik & Linnainmaa (2023) — *Factor Momentum*
-### PhD-Level Structured Reading Notes
+# Reading Notes on Arnott, Kalesnik & Linnainmaa (2023) — *Factor Momentum*
+
+These notes summarize the main ideas of the paper while preserving all the conceptual points mentioned earlier. The goal is not to replicate the paper verbatim but to ensure the interpretation does not contradict the authors’ intended meaning.
 
 ---
 
-# 1. Introduction: Research Question and Motivation
+## Introduction
 
-The paper investigates a central puzzle:
+The paper aims to understand the relationship between factor momentum and industry momentum. Conceptually, two directions could be imagined. First, strong industry performance might lead factors with large industry exposures to perform well. Second, strong factor performance could, in turn, lead industries with higher exposures to those factors to perform well. To disentangle this relationship, the authors use **industry-neutral factors**, which have the same exposure to all industries. If these industry-neutral factors still exhibit strong momentum, then industry performance cannot be the source of factor momentum. This empirical result strongly points toward the direction **factor → industry**, not **industry → factor**.
 
-> Industries, characteristic-sorted portfolios, and academic risk factors all exhibit strong short-term cross-sectional momentum. Are these separate anomalies, or do they originate from a common underlying mechanism?
+More broadly, the paper argues that industry momentum is **not a phenomenon about industries per se**. If one clusters firms on characteristics instead of industries, one still observes momentum. This implies that there is a common underlying risk structure driving performance. Since controlling for factor momentum removes the profitability of these characteristic-based momentum strategies, the conclusion is that industry momentum does not originate from industry information itself.
 
-## 1.1 Possible causal links between industries and factors
+Factor momentum is defined from the perspective of risk factors. Although factors are regarded as systematic risk exposures, each factor is ultimately a long-short portfolio. If, for instance, the size factor performs well, the strategy implicitly goes long stocks with high size-beta and short stocks with low size-beta. Thus, even factor momentum emerges through the cross-sectional return behavior of underlying stocks.
 
-Two theoretical directions exist:
+The authors show that industry momentum is fully explained by factor momentum. First, the cross-sectional and time-series variation in industry betas explains a much larger share of returns than models assuming constant loadings. Industries do in fact have different factor exposures, and these exposures change through time. Second, by constructing **systematic industries**—that is, portfolios built entirely from factor loadings—the variation in betas alone generates returns remarkably similar to industry returns. This provides direct evidence that industry momentum is driven primarily by factor momentum.
 
-1. **Industry → Factor**  
-   Factors often contain incidental industry exposures, so industry shocks *could* transmit to factor returns.
+The paper also emphasizes the connection and difference between **characteristic momentum** and **factor momentum**. Characteristics represent features other than risk factors, yet characteristic momentum also disappears once factor momentum is controlled for. This suggests that characteristic momentum is another manifestation of the same underlying force.
 
-2. **Factor → Industry**  
-   If factors themselves have momentum, industries—through heterogeneous factor loadings—inherit that momentum.
-
-Empirical evidence:
-
-> **Industry-neutral factors still exhibit strong momentum**, implying industries cannot be the source.  
-> Causality must run **factor → industry**, not the reverse.
+Finally, the authors address a key puzzle: if individual stocks tend to reverse at the 1-month horizon, why do factors—or industries, which are collections of stocks—display momentum at the same horizon? Understanding this tension requires examining the decomposition of stock-level returns.
 
 ---
 
-# 2. Industry Momentum Is Not an Independent Phenomenon
+## Industry versus Factor Momentum
 
-The authors show that partitioning stocks using other characteristics (size, B/M, size×B/M, k-means clusters) also produces momentum as strong as industry momentum.
+Empirically, the only strongly significant industry momentum strategy is the one-month formation and holding strategy, with a return of roughly 37 basis points per month. Importantly, this one-month industry momentum is largely unrelated to one-month individual stock momentum. That is, stocks that perform well over one month do not align closely with industries that perform well over one month. Thus, industry momentum and stock momentum—the latter defined over longer horizons—capture distinct return dynamics.
 
-Once factor momentum is controlled for:
+One can loosely think of a stock’s short-term return as combining:  
+(1) an industry-related component that tends to exhibit momentum, and  
+(2) an idiosyncratic or firm-specific component that tends to exhibit reversal.  
+When aggregated at the industry level, the firm-specific reversal components average out, leaving the industry-level systematic component, which exhibits momentum.
 
-- All characteristic-based momentum strategies lose alpha
-- Industry momentum also loses alpha
+Table 4 is crucial here. When the authors construct three strategies—industry momentum, factor momentum, and industry-neutral-factor momentum—and run spanning regressions, they find that factor momentum fully explains industry momentum. Meanwhile, industry momentum does not explain factor momentum. This asymmetry reinforces the idea that factor momentum is the more fundamental phenomenon, with industry momentum merely reflecting factor return continuation through variations in industry-level factor loadings.
 
-Thus:
+The authors then ask whether industry momentum is really about industries at all. They show that if we partition stocks using other characteristics (e.g., size, book-to-market, machine-learning clusters), we can also obtain momentum strategies of similar magnitude. In other words, industries are only one possible partition of the cross-section, not a uniquely meaningful one for momentum generation.
 
-> Industry momentum is not about industries per se.  
-> It arises whenever portfolios differ in **factor loadings**, making it one manifestation of **factor-driven momentum**.
+### Transmission of Factor Momentum into the Cross-Section of Industries
 
----
+The key idea is that **factor loadings vary substantially across industries**, so ranking industries by past returns is effectively a ranking of their factor exposures. Because factor returns exhibit momentum, industries with higher exposures to “winning” factors will themselves appear as winners. Using panel regressions, the authors demonstrate that static factor loadings explain little variation in industry returns, but once industry effects and quarter effects are introduced—allowing loadings to vary across industries and time—the explanatory power increases dramatically.
 
-# 3. Factor Momentum: Definition and Interpretation
+To further isolate the mechanism, the authors construct **systematic industries** using estimated factor loadings. The idea is:  
+- ignore the identity of industries,  
+- replicate them purely based on factor exposures, and  
+- examine how much momentum remains.  
 
-Factor momentum is a cross-sectional strategy:
-
-- Long factors with high past 1-month returns  
-- Short factors with low past 1-month returns  
-
-Although factors are interpreted as systematic risk exposures, operationally they are long-short stock portfolios.
-
-Thus:
-
-> Factor momentum reflects persistence in **systematic risk exposures**, not stock-specific information.
+They find that as more factors are included in the construction of these systematic industries, the returns more closely resemble industry returns, and the residual industry momentum becomes negligible. In effect, this is a decomposition: once the factor-momentum component is removed, little independent industry momentum remains.
 
 ---
 
-# 4. Why Industry Momentum Exists: Cross-Sectional Variation in Factor Loadings
+## Momentum in Principal Component Factors
 
-Empirical findings:
+The paper relies on asset-pricing theory, particularly APT, which states that true risk factors must correspond to systematic sources of return variation. The authors focus on **systematic factors**, which are extracted via PCA and correspond to high-eigenvalue components. These components reflect economically meaningful, undiversifiable risks.
 
-- Industry factor loadings vary substantially across industries and across time.
-- Allowing β to vary increases factor model explanatory power dramatically:
-  - Static loadings: ~2% R²
-  - Time-varying + industry-specific loadings: ~36% R²
-
-Therefore:
-
-> Industries differ largely because they have different exposures to factors that themselves exhibit momentum.
-
-Industry momentum = factor momentum transmitted through heterogeneous betas.
+Previous work shows that unconditional factor returns—factor premia—tend to reside in these high-PC components. This paper extends that insight by showing that **factor momentum also resides primarily in high-PC factors**. Momentum is not evenly distributed across all factors; instead, it is concentrated among those that represent systematic risk. This reinforces the idea that momentum in industries or characteristics ultimately traces back to a small set of underlying systematic factors.
 
 ---
 
-# 5. Systematic Industries: Reconstructing Industries Using Factor Exposures
+## Reconciling Factor Momentum with Short-Term Reversals in Stock Returns
 
-Construct **systematic industries**:
+Short-term returns can be decomposed into three components:  
+- autocovariance,  
+- cross-serial covariance, and  
+- mean effects.
 
-\[
-r^{sys}_{j,t} = \sum_k \hat\beta_{j,k,t} F_{k,t}
-\]
+This aligns with the idea that stock returns can also be decomposed into **systematic** and **idiosyncratic** components.
 
-Findings:
+The authors estimate a stock’s systematic return using a multi-factor model and daily data to estimate betas. Subtracting this from the actual return yields the idiosyncratic component. They find that idiosyncratic returns exhibit reversal, whereas systematic returns do not. In other words, at the stock level, reversals arise from corrections in the idiosyncratic return component. Meanwhile, the systematic component—which is what factors and industries aggregate—exhibits momentum.
 
-- Systematic industries show nearly the same momentum as real industries.
-- Using more factors strengthens systematic industry momentum.
-- Controlling for systematic industry momentum drives **industry momentum alpha → 0**.
+This explains the apparent contradiction:  
+- factors and industries show momentum because they reflect systematic return continuation,  
+- individual stocks show reversal because their idiosyncratic components dominate at the 1-month horizon and tend to correct in the opposite direction.
 
-Interpretation:
+Ultimately, factor momentum and stock-level reversals coexist because they operate on different components of return dynamics.
 
-> Industry momentum can be fully replicated by factor momentum.  
-> Industry-specific information is unnecessary.
-
----
-
-# 6. Characteristic Momentum vs. Factor Momentum
-
-Examining alternative portfolios (industries, size deciles, B/M deciles, 25 portfolios, cluster portfolios):
-
-- All characteristic momentum strategies strongly correlate with each other (ρ ≈ 0.5–0.8)
-- All correlate with factor momentum (ρ ≈ 0.7)
-- Controlling for factor momentum removes their alphas
-- But controlling for characteristic momentum does *not* remove factor momentum
-
-Conclusion:
-
-> Characteristic momentum is factor momentum viewed through different portfolio partitions.  
-> Factor momentum is the primitive; characteristic momentum is derived.
-
----
-
-# 7. Transmission Mechanism: How Factor Momentum Becomes Industry Momentum
-
-Mechanism:
-
-1. Factor returns show short-term positive autocorrelation.
-2. Industries differ in factor loadings (β).
-3. A high-return industry last month was likely exposed to “winning” factors.
-4. Sorting industries by past returns is equivalent to sorting by factor exposures.
-
-Thus:
-
-> Ranking industries = ranking factor loadings = ranking factor returns.
-
-Industry momentum = factor momentum transmitted via cross-sectional β variation.
-
----
-
-# 8. Principal Components: Momentum Resides Only in Systematic Factors
-
-Based on APT (Ross 1976) and Kozak–Nagel–Santosh (2018, 2020):
-
-- Only factors associated with systematic covariance structure should have pricing power.
-- PCA identifies these as **high-eigenvalue PC factors**.
-
-Empirical results:
-
-- Momentum exists only among the top few high-eigenvalue PCs.
-- Lower-eigenvalue PC factors have no incremental momentum once top PCs are included.
-
-Interpretation:
-
-> Momentum resides exclusively in systematic factors, matching economic theory and no-arbitrage principles.
-
----
-
-# 9. Reconciling Factor Momentum with Stock-Level Short-Term Reversals
-
-Puzzle:
-
-> Stocks exhibit 1-month reversals, while factors and industries exhibit 1-month momentum.
-
-Using the Lo–MacKinlay (1990) decomposition:
-
-1. Autocovariance → supports momentum  
-2. Cross-serial covariance → supports reversals  
-3. Mean effect → small here  
-
-Industry and factor returns:
-
-- Positive autocovariance → momentum
-
-Individual stock returns:
-
-- Negative autocovariance → reversal
-
-To reconcile: decompose stock returns
-
-\[
-r_{i,t} = r^{sys}_{i,t} + r^{idio}_{i,t}
-\]
-
-Using a 9-factor model with daily beta estimation:
-
-- Systematic component has **positive autocorrelation** → momentum  
-- Idiosyncratic component also slightly positive (not the source of reversals)  
-- Reversal comes from **negative cross-serial correlation**:
-  \[
-  r^{sys}_{t} \rightarrow r^{idio}_{t+1}
-  \]
-
-Interpretation:
-
-> Stock-level reversals arise from corrections to excess co-movement, not from systematic components.  
-> Therefore, factor momentum and stock reversals coexist without contradiction.
-
----
-
-# 10. Overall Interpretation and Contribution
-
-The paper delivers a unified theory:
-
-- **Factor momentum is the fundamental phenomenon.**
-- Industry and characteristic momentum are projections of factor momentum through cross-sectional variation in loadings.
-- Momentum exists only in systematic factors (high-PC), consistent with APT.
-- Stock reversals originate from idiosyncratic adjustments, not from systematic components.
-
-Summary:
-
-> Momentum is a systematic-risk phenomenon.  
-> Industry and characteristic momentum exist *because* factor momentum exists.
